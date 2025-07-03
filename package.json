@@ -2,7 +2,7 @@
   "name": "@mingdaocloud/hap-mcp",
   "module": "src/index.ts",
   "type": "module",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "HAP - Model Context Protocol (MCP) Server by MingdaoCloud",
   "private": false,
   "main": "build/index.js",
