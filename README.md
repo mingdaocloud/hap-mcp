@@ -4,31 +4,12 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6)
 ![npm](https://img.shields.io/npm/v/@mingdaocloud/hap-mcp)
 
-HAP (Human-AI Protocol) - A powerful MCP (Model Context Protocol) server by MingdaoCloud for seamless AI integration.
+HAP (Hyper Application Platform) is an APaaS platform launched by Mingdao [](https://www.mingdao.com) that helps you rapidly build enterprise-grade applications with no coding.
+This is the MCP (Model Context Protocol) server by HAP for seamless AI integration.
 
 ## 🚀 Quick Start with Cursor
 
-### 1. Install the Package
-
-```bash
-# Install globally
-npm install -g @mingdaocloud/hap-mcp
-
-# Or use in your project
-npm install @mingdaocloud/hap-mcp
-```
-
-### 2. Configure Environment Variables
-
-Set up your Mingdao API credentials as environment variables:
-
-```bash
-export APPKEY="your_APPKEY_here"
-export SIGN="your_signature_here"
-export HOST="https://www.nocoly.com"  # Optional: for private deployment only
-```
-
-### 3. Configure Cursor MCP Settings
+### 1. Configure Cursor MCP Settings (Need Node.js 18+)
 
 Add the following configuration to your Cursor settings:
 
@@ -40,7 +21,7 @@ Create or edit `~/.cursor/mcp.json`:
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
+      "args": ["-y", "@mingdaocloud/hap-mcp"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here"
@@ -58,7 +39,7 @@ For private deployment environments only. Create `.cursor/mcp.json` in your proj
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
+      "args": ["-y", "@mingdaocloud/hap-mcp"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here",
@@ -73,16 +54,13 @@ For private deployment environments only. Create `.cursor/mcp.json` in your proj
 
 ### 4. Start Using in Cursor
 
-After configuration, restart Cursor and you'll have access to all Mingdao API tools directly in your AI conversations!
+After configuration, true on the `hap-mcp` tool and you'll have access to all HAP API tools directly in your AI conversations!
 
 ## 📋 Alternative Installation Methods
 
 ```bash
 # Run directly with npx
 npx @mingdaocloud/hap-mcp
-
-# Or use in your project
-npm install @mingdaocloud/hap-mcp
 ```
 
 ## 🔭 What's Included
@@ -90,7 +68,7 @@ npm install @mingdaocloud/hap-mcp
 HAP provides:
 
 - Production-ready MCP server with both stdio and HTTP transport options
-- **Complete Mingdao API integration** - Full access to Mingdao platform APIs
+- **Complete HAP API integration** - Full access to HAP Application APIs
 - Pre-built tools for common AI integration tasks
 - Extensible architecture for custom tools, resources, and prompts
 - TypeScript support with full type safety
@@ -100,19 +78,18 @@ HAP provides:
 
 - **FastMCP Framework**: Built on the robust FastMCP framework
 - **Dual Transport Support**: Run over stdio or HTTP for maximum flexibility
-- **Mingdao API Tools**: Complete set of tools for Mingdao platform operations
+- **HAP API Tools**: Complete set of tools for HAP application operations
 - **TypeScript**: Full TypeScript support for enterprise-grade development
 - **Production Ready**: Optimized for production deployments
 - **Extensible**: Easy to extend with custom functionality
-- **MingdaoCloud Integration**: Seamless integration with MingdaoCloud ecosystem
 
-## 🔧 Mingdao API Tools
+## 🔧 HAP API Tools
 
-HAP includes a complete set of tools for interacting with the Mingdao platform:
+`hap-mcp` includes a complete set of tools for interacting with the HAP application:
 
-### Available Tools (25 Tools)
+### Available Tools (28 Tools)
 
-#### Core Worksheet Operations (7 Tools)
+#### Core Worksheet Operations (9 Tools)
 - **add_worksheet_record**: Add new records to worksheets
 - **delete_worksheet_record**: Delete records from worksheets
 - **update_worksheet_record**: Update existing records
@@ -120,34 +97,27 @@ HAP includes a complete set of tools for interacting with the Mingdao platform:
 - **list_worksheet_records**: List records with filtering and pagination
 - **list_worksheets**: List all worksheets in application
 - **get_worksheet_pivot_data**: Get pivot table data with aggregation
-
-#### Application & Worksheet Management (8 Tools)
-- **get_app_info**: Get application structure and information
-- **get_worksheet_info**: Get detailed worksheet structure
-- **get_worksheet_rows**: Get records with advanced filtering
-- **get_row_detail**: Get detailed information of specific records
-- **add_row**: Create new records (simplified)
-- **update_row**: Update records (simplified)
-- **delete_row**: Delete records (simplified)
 - **create_worksheet**: Create new worksheets with controls
+- **get_worksheet_record_detail**: Get detailed information of specific records
 
 #### Batch Operations (2 Tools)
-- **add_rows_batch**: Bulk create multiple records
-- **update_rows_batch**: Bulk update multiple records
+- **add_worksheet_records_batch**: Bulk create multiple records
+- **update_worksheet_records_batch**: Bulk update multiple records
 
 #### Advanced Features (4 Tools)
-- **get_related_records**: Get records from linked worksheets
-- **get_share_link**: Generate sharing links for records
-- **get_row_count**: Get total record count in worksheets
-- **get_row_logs**: Get operation history for records
+- **get_related_worksheet_records**: Get records from linked worksheets
+- **get_worksheet_record_share_link**: Generate sharing links for records
+- **get_worksheet_record_count**: Get total record count in worksheets
+- **get_worksheet_record_logs**: Get operation history for records
 
-#### Role Management (6 Tools)
+#### Role Management (7 Tools)
 - **get_roles**: List application roles
 - **create_role**: Create new roles with permissions
 - **delete_role**: Delete roles
 - **add_role_members**: Add users to roles
 - **remove_role_members**: Remove users from roles
 - **get_role_detail**: Get detailed role information
+- **exit_app**: Kick someone off from application
 
 #### Option Set Management (4 Tools)
 - **create_option_set**: Create new option sets
@@ -156,23 +126,18 @@ HAP includes a complete set of tools for interacting with the Mingdao platform:
 - **delete_option_set**: Delete option sets
 
 #### Utility Tools (2 Tools)
-- **exit_app**: Exit from application
 - **get_area_info**: Get geographical area information
 
 ### Quick Example
 ```json
 {
-  "tool": "get_worksheet_rows",
+  "tool": "list_worksheet_records",
   "parameters": {
     "worksheetId": "worksheet_id",
     "pageSize": 50
   }
 }
 ```
-
-**Note**: Authentication is now handled automatically through environment variables. No need to pass `appKey`, `sign`, or `host` parameters in tool calls. All tool names have been simplified by removing the `mingdao_` prefix.
-
-For detailed documentation, see [MINGDAO_API_TOOLS.md](./MINGDAO_API_TOOLS.md).
 
 ## 🚀 Getting Started
 
@@ -312,7 +277,7 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
+      "args": ["-y", "@mingdaocloud/hap-mcp"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here"
@@ -331,7 +296,7 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
+      "args": ["-y", "@mingdaocloud/hap-mcp"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here",
