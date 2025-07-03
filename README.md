@@ -6,13 +6,78 @@
 
 HAP (Human-AI Protocol) - A powerful MCP (Model Context Protocol) server by MingdaoCloud for seamless AI integration.
 
-## 📋 Installation & Usage
+## 🚀 Quick Start with Cursor
+
+### 1. Install the Package
 
 ```bash
 # Install globally
 npm install -g @mingdaocloud/hap-mcp
 
-# Or run directly with npx
+# Or use in your project
+npm install @mingdaocloud/hap-mcp
+```
+
+### 2. Configure Environment Variables
+
+Set up your Mingdao API credentials as environment variables:
+
+```bash
+export MINGDAO_APP_KEY="your_app_key_here"
+export MINGDAO_SIGN="your_signature_here"
+export MINGDAO_HOST="https://your-domain.com"  # Optional: for custom domains
+```
+
+### 3. Configure Cursor MCP Settings
+
+Add the following configuration to your Cursor settings:
+
+**Option A: Using Global Configuration**
+Create or edit `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "hap-mcp": {
+      "command": "npx",
+      "args": ["@mingdaocloud/hap-mcp"],
+      "env": {
+        "MINGDAO_APP_KEY": "your_app_key_here",
+        "MINGDAO_SIGN": "your_signature_here",
+        "MINGDAO_HOST": "https://your-domain.com"
+      }
+    }
+  }
+}
+```
+
+**Option B: Using Project Configuration**
+Create `.cursor/mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "hap-mcp": {
+      "command": "npx",
+      "args": ["@mingdaocloud/hap-mcp"],
+      "env": {
+        "MINGDAO_APP_KEY": "your_app_key_here",
+        "MINGDAO_SIGN": "your_signature_here",
+        "MINGDAO_HOST": "https://your-domain.com"
+      }
+    }
+  }
+}
+```
+
+### 4. Start Using in Cursor
+
+After configuration, restart Cursor and you'll have access to all Mingdao API tools directly in your AI conversations!
+
+## 📋 Alternative Installation Methods
+
+```bash
+# Run directly with npx
 npx @mingdaocloud/hap-mcp
 
 # Or use in your project
@@ -59,27 +124,13 @@ HAP includes a complete set of tools for interacting with the Mingdao platform:
 {
   "tool": "mingdao_get_worksheet_rows",
   "parameters": {
-    "appKey": "your_app_key",
-    "sign": "your_signature",
     "worksheetId": "worksheet_id",
     "pageSize": 50
   }
 }
 ```
 
-### Custom Server Support
-```json
-{
-  "tool": "mingdao_get_worksheet_rows",
-  "parameters": {
-    "appKey": "your_app_key",
-    "sign": "your_signature",
-    "host": "https://your-domain.com",
-    "worksheetId": "worksheet_id",
-    "pageSize": 50
-  }
-}
-```
+**Note**: Authentication is now handled automatically through environment variables. No need to pass `appKey`, `sign`, or `host` parameters in tool calls.
 
 For detailed documentation, see [MINGDAO_API_TOOLS.md](./MINGDAO_API_TOOLS.md).
 
@@ -218,13 +269,13 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
 ```json
 {
   "mcpServers": {
-    "my-mcp-stdio": {
-      "command": "npm",
-      "args": [
-        "start"
-      ],
+    "hap-mcp": {
+      "command": "npx",
+      "args": ["@mingdaocloud/hap-mcp"],
       "env": {
-        "NODE_ENV": "development"
+        "MINGDAO_APP_KEY": "your_app_key_here",
+        "MINGDAO_SIGN": "your_signature_here",
+        "MINGDAO_HOST": "https://your-domain.com"
       }
     },
     "my-mcp-sse": {
@@ -236,7 +287,12 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
 
 You can also create a global configuration at `~/.cursor/mcp.json` to make your MCP servers available in all your Cursor workspaces.
 
-Note: 
+**Environment Variables:**
+- `MINGDAO_APP_KEY` (required): Your Mingdao application key
+- `MINGDAO_SIGN` (required): Your Mingdao signature
+- `MINGDAO_HOST` (optional): Custom host URL (e.g., https://your-domain.com). If provided, API calls will use `host/api` instead of `https://api.mingdao.com`
+
+Note:
 - The `command` type entries run the server in stdio mode
 - The `url` type entry connects to the HTTP server using SSE transport
 - You can provide environment variables using the `env` field
@@ -259,6 +315,14 @@ npx fastmcp inspect server.ts
 You can customize the server using environment variables:
 
 ```bash
+# Required Mingdao API credentials
+export MINGDAO_APP_KEY="your_app_key_here"
+export MINGDAO_SIGN="your_signature_here"
+
+# Optional custom host (if not using api.mingdao.com)
+export MINGDAO_HOST="https://your-domain.com"
+
+# Server configuration
 # Change the HTTP port (default is 3001)
 PORT=8080 npm run start:http
 

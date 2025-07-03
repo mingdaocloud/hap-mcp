@@ -22,21 +22,32 @@ export interface ApiResponse<T = any> {
 export class MingdaoApiService {
   private baseUrl: string;
 
-  constructor(private config?: MingdaoApiConfig) {
-    this.baseUrl = config?.baseUrl || 'https://api.mingdao.com';
+  constructor() {
+    this.baseUrl = 'https://api.mingdao.com';
+  }
+
+  private getApiConfig(): MingdaoApiConfig {
+    const appKey = process.env.MINGDAO_APP_KEY;
+    const sign = process.env.MINGDAO_SIGN;
+    const host = process.env.MINGDAO_HOST;
+
+    if (!appKey || !sign) {
+      throw new Error('MINGDAO_APP_KEY and MINGDAO_SIGN environment variables are required');
+    }
+
+    return {
+      appKey,
+      sign,
+      ...(host && { host })
+    };
   }
 
   private async makeRequest<T>(
     endpoint: string,
     method: 'GET' | 'POST' = 'POST',
-    data?: any,
-    config?: MingdaoApiConfig
+    data?: any
   ): Promise<ApiResponse<T>> {
-    const apiConfig = config || this.config;
-
-    if (!apiConfig?.appKey || !apiConfig?.sign) {
-      throw new Error('AppKey and Sign are required for API calls');
-    }
+    const apiConfig = this.getApiConfig();
 
     // Determine the base URL based on host configuration
     let baseUrl = this.baseUrl;
@@ -44,8 +55,6 @@ export class MingdaoApiService {
       // Remove trailing slash from host if present
       const cleanHost = apiConfig.host.replace(/\/$/, '');
       baseUrl = `${cleanHost}/api`;
-    } else if (apiConfig.baseUrl) {
-      baseUrl = apiConfig.baseUrl;
     }
 
     const url = `${baseUrl}${endpoint}`;
@@ -87,118 +96,118 @@ export class MingdaoApiService {
   }
 
   // Application APIs
-  async getAppInfo(config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v1/open/app/get', 'GET', {}, config);
+  async getAppInfo(): Promise<ApiResponse> {
+    return this.makeRequest('/v1/open/app/get', 'GET', {});
   }
 
   // Worksheet APIs
-  async createWorksheet(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/addWorksheet', 'POST', data, config);
+  async createWorksheet(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/addWorksheet', 'POST', data);
   }
 
-  async getWorksheetInfo(worksheetId: string, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getWorksheetInfo', 'POST', { worksheetId }, config);
+  async getWorksheetInfo(worksheetId: string): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getWorksheetInfo', 'POST', { worksheetId });
   }
 
-  async getFilterRows(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getFilterRows', 'POST', data, config);
+  async getFilterRows(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getFilterRows', 'POST', data);
   }
 
-  async addRow(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/addRow', 'POST', data, config);
+  async addRow(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/addRow', 'POST', data);
   }
 
-  async getRowById(worksheetId: string, rowId: string, getSystemControl: boolean = false, config: MingdaoApiConfig): Promise<ApiResponse> {
+  async getRowById(worksheetId: string, rowId: string, getSystemControl: boolean = false): Promise<ApiResponse> {
     return this.makeRequest('/v2/open/worksheet/getRowById', 'GET', {
       worksheetId,
       rowId,
       getSystemControl: getSystemControl.toString(),
-    }, config);
+    });
   }
 
-  async updateRow(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/editRow', 'POST', data, config);
+  async updateRow(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/editRow', 'POST', data);
   }
 
-  async deleteRow(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/deleteRow', 'POST', data, config);
+  async deleteRow(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/deleteRow', 'POST', data);
   }
 
   // Batch operations
-  async addRows(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/addRows', 'POST', data, config);
+  async addRows(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/addRows', 'POST', data);
   }
 
-  async updateRows(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/editRows', 'POST', data, config);
+  async updateRows(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/editRows', 'POST', data);
   }
 
   // Additional worksheet operations
-  async getRelatedRecords(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getRelationRows', 'POST', data, config);
+  async getRelatedRecords(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getRelationRows', 'POST', data);
   }
 
-  async getShareLink(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getRowShareUrl', 'POST', data, config);
+  async getShareLink(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getRowShareUrl', 'POST', data);
   }
 
-  async getRowCount(worksheetId: string, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getRowsCount', 'POST', { worksheetId }, config);
+  async getRowCount(worksheetId: string): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getRowsCount', 'POST', { worksheetId });
   }
 
-  async getRowLogs(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/worksheet/getRowLogs', 'POST', data, config);
+  async getRowLogs(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/worksheet/getRowLogs', 'POST', data);
   }
 
   // Role management APIs
-  async getRoles(config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/list', 'POST', {}, config);
+  async getRoles(): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/list', 'POST', {});
   }
 
-  async createRole(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/add', 'POST', data, config);
+  async createRole(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/add', 'POST', data);
   }
 
-  async deleteRole(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/delete', 'POST', data, config);
+  async deleteRole(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/delete', 'POST', data);
   }
 
-  async addRoleMembers(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/addMembers', 'POST', data, config);
+  async addRoleMembers(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/addMembers', 'POST', data);
   }
 
-  async removeRoleMembers(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/removeMembers', 'POST', data, config);
+  async removeRoleMembers(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/removeMembers', 'POST', data);
   }
 
-  async exitApp(config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/quit', 'POST', {}, config);
+  async exitApp(): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/quit', 'POST', {});
   }
 
-  async getRoleDetail(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/get', 'POST', data, config);
+  async getRoleDetail(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/get', 'POST', data);
   }
 
   // Option set APIs
-  async createOptionSet(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/optionSet/add', 'POST', data, config);
+  async createOptionSet(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/optionSet/add', 'POST', data);
   }
 
-  async getOptionSet(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/optionSet/get', 'POST', data, config);
+  async getOptionSet(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/optionSet/get', 'POST', data);
   }
 
-  async updateOptionSet(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/optionSet/edit', 'POST', data, config);
+  async updateOptionSet(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/optionSet/edit', 'POST', data);
   }
 
-  async deleteOptionSet(data: any, config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/optionSet/delete', 'POST', data, config);
+  async deleteOptionSet(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/optionSet/delete', 'POST', data);
   }
 
   // Utility APIs
-  async getAreaInfo(config: MingdaoApiConfig): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/area/get', 'POST', {}, config);
+  async getAreaInfo(): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/area/get', 'POST', {});
   }
 }
 
