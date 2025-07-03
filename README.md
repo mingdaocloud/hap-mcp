@@ -4,14 +4,14 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6)
 ![npm](https://img.shields.io/npm/v/@mingdaocloud/hap-mcp)
 
-HAP (Hyper Application Platform) is an APaaS platform launched by Mingdao [](https://www.mingdao.com) that helps you rapidly build enterprise-grade applications with no coding.
+HAP (Hyper Application Platform) is an APaaS platform launched by Mingdao (https://www.mingdao.com) that helps you rapidly build enterprise-grade applications with no coding.
 This is the MCP (Model Context Protocol) server by HAP for seamless AI integration.
 
-## 🚀 Quick Start with Cursor
+## 🚀 Quick Start with MCP Client (e.g. cursor)
 
-### 1. Configure Cursor MCP Settings (Need Node.js 18+)
+### 1. Configure cursor MCP Settings (Need Node.js 18+)
 
-Add the following configuration to your Cursor settings:
+Add the following configuration to your cursor settings:
 
 **Option A: Standard Configuration (SaaS Version)**
 Create or edit `~/.cursor/mcp.json`:
@@ -52,7 +52,7 @@ For private deployment environments only. Create `.cursor/mcp.json` in your proj
 
 **Note**: The `HOST` parameter is only required for private deployment environments. Replace `https://www.nocoly.com` with your actual private deployment server URL.
 
-### 4. Start Using in Cursor
+### 2. Start Using in cursor
 
 After configuration, true on the `hap-mcp` tool and you'll have access to all HAP API tools directly in your AI conversations!
 
@@ -104,7 +104,8 @@ HAP provides:
 - **add_worksheet_records_batch**: Bulk create multiple records
 - **update_worksheet_records_batch**: Bulk update multiple records
 
-#### Advanced Features (4 Tools)
+#### Advanced Features (5 Tools)
+- **get_app_info**: Get application information including groups, worksheets, and custom pages
 - **get_related_worksheet_records**: Get records from linked worksheets
 - **get_worksheet_record_share_link**: Generate sharing links for records
 - **get_worksheet_record_count**: Get total record count in worksheets
@@ -125,7 +126,7 @@ HAP provides:
 - **update_option_set**: Update existing option sets
 - **delete_option_set**: Delete option sets
 
-#### Utility Tools (2 Tools)
+#### Utility Tools (1 Tools)
 - **get_area_info**: Get geographical area information
 
 ### Quick Example
@@ -186,7 +187,7 @@ The MCP server supports two transport methods:
 
 1. **stdio Transport** (Command Line Mode):
    - Runs on your **local machine**
-   - Managed automatically by Cursor
+   - Managed automatically by MCP Client (e.g. cursor)
    - Communicates directly via `stdout`
    - Only accessible by you locally
    - Ideal for personal development and tools
