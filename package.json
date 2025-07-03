@@ -1,0 +1,61 @@
+{
+  "name": "@mingdaocloud/hap-mcp",
+  "module": "src/index.ts",
+  "type": "module",
+  "version": "1.3.2",
+  "description": "HAP - Model Context Protocol (MCP) Server by MingdaoCloud",
+  "private": false,
+  "main": "build/index.js",
+  "bin": {
+    "hap-mcp": "build/index.js"
+  },
+  "files": [
+    "build/**/*",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "llm",
+    "mingdaocloud",
+    "hap-mcp"
+  ],
+  "author": "MingdaoCloud",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mingdaocloud/hap-mcp.git"
+  },
+  "homepage": "https://github.com/mingdaocloud/hap-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/mingdaocloud/hap-mcp/issues"
+  },
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.ts",
+    "build": "tsc",
+    "build:http": "tsc",
+    "dev": "node --loader ts-node/esm --watch src/index.ts",
+    "start:http": "node --loader ts-node/esm src/server/http-server.ts",
+    "dev:http": "node --loader ts-node/esm --watch src/server/http-server.ts",
+    "prepublishOnly": "npm run build",
+    "publish-check": "node scripts/publish-check.js"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2",
+    "@valibot/to-json-schema": "^1.0.0",
+    "effect": "^3.14.4"
+  },
+  "dependencies": {
+    "fastmcp": "^1.21.0",
+    "cors": "^2.8.5",
+    "zod": "^3.24.2"
+  }
+}
