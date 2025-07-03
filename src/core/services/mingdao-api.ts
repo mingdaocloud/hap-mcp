@@ -27,12 +27,12 @@ export class MingdaoApiService {
   }
 
   private getApiConfig(): MingdaoApiConfig {
-    const appKey = process.env.MINGDAO_APP_KEY;
-    const sign = process.env.MINGDAO_SIGN;
-    const host = process.env.MINGDAO_HOST;
+    const appKey = process.env.APPKEY;
+    const sign = process.env.SIGN;
+    const host = process.env.HOST;
 
     if (!appKey || !sign) {
-      throw new Error('MINGDAO_APP_KEY and MINGDAO_SIGN environment variables are required');
+      throw new Error('APPKEY and SIGN environment variables are required');
     }
 
     return {

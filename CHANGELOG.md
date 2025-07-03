@@ -5,14 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [1.3.2] - 2025-01-03
 
 ### Enhanced
-- **Field Type Documentation**: Added comprehensive field type reference to `mingdao_get_worksheet_info` tool
+- **Field Type Documentation**: Added comprehensive field type reference to `get_worksheet_info` tool
   - Complete field type mapping with 30+ control types
   - Detailed description for each field type (Text, Number, Option, Date, etc.)
   - Enhanced tool description with field type reference
   - Added usage examples showing field type interpretation
 
 ### Documentation Improvements
-- Added complete field type reference table in MINGDAO_API_TOOLS.md
 - Enhanced worksheet info examples with field type explanations
 - Improved developer experience with detailed type specifications
 - Added quick reference for common field type categories
@@ -20,7 +19,7 @@ All notable changes to this project will be documented in this file.
 ## [1.3.1] - 2025-01-03
 
 ### Enhanced
-- **Detailed Filters Documentation**: Added comprehensive documentation for the `filters` parameter in `mingdao_get_worksheet_rows` tool
+- **Detailed Filters Documentation**: Added comprehensive documentation for the `filters` parameter in `get_worksheet_rows` tool
   - Complete FilterTypeEnum reference with 20+ filter types
   - DateRangeEnum reference with 15+ date range options
   - Detailed parameter structure explanation
@@ -55,30 +54,30 @@ All notable changes to this project will be documented in this file.
 ## [1.2.0] - 2025-01-03
 
 ### Added
-- **Complete API Coverage**: Added all remaining Mingdao API tools (25+ tools total)
+- **Complete API Coverage**: Added all remaining HAP API tools (25+ tools total)
 - **Batch Operations**:
-  - `mingdao_add_rows_batch` - Batch create multiple records
-  - `mingdao_update_rows_batch` - Batch update multiple records
+  - `add_rows_batch` - Batch create multiple records
+  - `update_rows_batch` - Batch update multiple records
 - **Extended Worksheet Operations**:
-  - `mingdao_get_related_records` - Get related records from linked worksheets
-  - `mingdao_get_share_link` - Get sharing links for records
-  - `mingdao_get_row_count` - Get total row count in worksheets
-  - `mingdao_get_row_logs` - Get operation logs for records
+  - `get_related_records` - Get related records from linked worksheets
+  - `get_share_link` - Get sharing links for records
+  - `get_row_count` - Get total row count in worksheets
+  - `get_row_logs` - Get operation logs for records
 - **Role Management Tools**:
-  - `mingdao_get_roles` - Get role list
-  - `mingdao_create_role` - Create new roles
-  - `mingdao_delete_role` - Delete roles
-  - `mingdao_add_role_members` - Add members to roles
-  - `mingdao_remove_role_members` - Remove members from roles
-  - `mingdao_get_role_detail` - Get role details
-  - `mingdao_exit_app` - Exit application
+  - `get_roles` - Get role list
+  - `create_role` - Create new roles
+  - `delete_role` - Delete roles
+  - `add_role_members` - Add members to roles
+  - `remove_role_members` - Remove members from roles
+  - `get_role_detail` - Get role details
+  - `exit_app` - Exit application
 - **Option Set Management**:
-  - `mingdao_create_option_set` - Create option sets
-  - `mingdao_get_option_set` - Get option set information
-  - `mingdao_update_option_set` - Update option sets
-  - `mingdao_delete_option_set` - Delete option sets
+  - `create_option_set` - Create option sets
+  - `get_option_set` - Get option set information
+  - `update_option_set` - Update option sets
+  - `delete_option_set` - Delete option sets
 - **Utility Tools**:
-  - `mingdao_get_area_info` - Get geographical area information
+  - `get_area_info` - Get geographical area information
 
 ### Changed
 - **Package Name**: Changed from `@mingdaoai/hap` to `@mingdaocloud/hap`
@@ -86,7 +85,7 @@ All notable changes to this project will be documented in this file.
 - **Improved API Service**: Extended MingdaoApiService with all API endpoints
 
 ### Technical Improvements
-- Complete API endpoint coverage for Mingdao platform
+- Complete API endpoint coverage for HAP platform
 - Enhanced error handling across all tools
 - Comprehensive parameter validation with Zod schemas
 - Detailed JSDoc documentation for all new methods
@@ -94,23 +93,23 @@ All notable changes to this project will be documented in this file.
 ## [1.1.0] - 2025-01-03
 
 ### Added
-- **Complete Mingdao API Integration**: Added full support for Mingdao platform APIs
+- **Complete HAP API Integration**: Added full support for HAP platform APIs
 - **Application Management Tools**:
-  - `mingdao_get_app_info` - Get application information and structure
+  - `get_app_info` - Get application information and structure
 - **Worksheet Management Tools**:
-  - `mingdao_create_worksheet` - Create new worksheets with custom controls
-  - `mingdao_get_worksheet_info` - Get worksheet structure and configuration
-  - `mingdao_get_worksheet_rows` - Get worksheet records with filtering and pagination
-  - `mingdao_get_row_detail` - Get detailed information of specific records
-  - `mingdao_add_row` - Create new records in worksheets
-  - `mingdao_update_row` - Update existing records
-  - `mingdao_delete_row` - Delete records (logical or physical deletion)
-- **MingdaoApiService**: Centralized API service for all Mingdao operations
+  - `create_worksheet` - Create new worksheets with custom controls
+  - `get_worksheet_info` - Get worksheet structure and configuration
+  - `get_worksheet_rows` - Get worksheet records with filtering and pagination
+  - `get_row_detail` - Get detailed information of specific records
+  - `add_row` - Create new records in worksheets
+  - `update_row` - Update existing records
+  - `delete_row` - Delete records (logical or physical deletion)
+- **MingdaoApiService**: Centralized API service for all HAP operations
 - **Comprehensive Documentation**: Added detailed API tools documentation
 - **Type Safety**: Full TypeScript support for all API parameters and responses
 
 ### Enhanced
-- Updated README with Mingdao API tools information
+- Updated README with HAP API tools information
 - Added usage examples and configuration guides
 - Improved error handling for API calls
 

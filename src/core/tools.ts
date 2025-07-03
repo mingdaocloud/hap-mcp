@@ -20,7 +20,7 @@ function registerMingdaoTools(server: FastMCP) {
   // Get Worksheet Fields Tool
   server.addTool({
     name: "get_worksheet_fields",
-    description: `Get worksheet fields information. The response includes field type information where each field has a 'type' value corresponding to the following field types:
+    description: `Get the field structure and field types of the worksheet. The response includes field type information where each field has a 'type' value corresponding to the following field types:
 
     Field Type Reference:
     2=Text, 3=Text-Phone, 4=Text-Phone, 5=Text-Email, 6=Number, 7=Text, 8=Number, 9=Option-Single Choice, 10=Option-Multiple Choices, 11=Option-Single Choice, 15=Date, 16=Date, 24=Option-Region, 25=Text, 26=Option-Member, 27=Option-Department, 28=Number, 29=Option-Linked Record, 30=Unknown Type, 31=Number, 32=Text, 33=Text, 35=Option-Linked Record, 36=Number-Yes1/No0, 37=Number, 38=Date, 40=Location, 41=Text, 46=Time, 48=Option-Organizational Role, 50=Text, 51=Query Record`,

@@ -23,9 +23,9 @@ npm install @mingdaocloud/hap-mcp
 Set up your Mingdao API credentials as environment variables:
 
 ```bash
-export MINGDAO_APP_KEY="your_app_key_here"
-export MINGDAO_SIGN="your_signature_here"
-export MINGDAO_HOST="https://your-domain.com"  # Optional: for custom domains
+export APPKEY="your_APPKEY_here"
+export SIGN="your_signature_here"
+export HOST="https://your-domain.com"  # Optional: for custom domains
 ```
 
 ### 3. Configure Cursor MCP Settings
@@ -42,9 +42,9 @@ Create or edit `~/.cursor/mcp.json`:
       "command": "npx",
       "args": ["@mingdaocloud/hap-mcp"],
       "env": {
-        "MINGDAO_APP_KEY": "your_app_key_here",
-        "MINGDAO_SIGN": "your_signature_here",
-        "MINGDAO_HOST": "https://your-domain.com"
+        "APPKEY": "your_APPKEY_here",
+        "SIGN": "your_signature_here",
+        "HOST": "https://your-domain.com"
       }
     }
   }
@@ -61,9 +61,9 @@ Create `.cursor/mcp.json` in your project root:
       "command": "npx",
       "args": ["@mingdaocloud/hap-mcp"],
       "env": {
-        "MINGDAO_APP_KEY": "your_app_key_here",
-        "MINGDAO_SIGN": "your_signature_here",
-        "MINGDAO_HOST": "https://your-domain.com"
+        "APPKEY": "your_APPKEY_here",
+        "SIGN": "your_signature_here",
+        "HOST": "https://your-domain.com"
       }
     }
   }
@@ -312,9 +312,9 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
       "command": "npx",
       "args": ["@mingdaocloud/hap-mcp"],
       "env": {
-        "MINGDAO_APP_KEY": "your_app_key_here",
-        "MINGDAO_SIGN": "your_signature_here",
-        "MINGDAO_HOST": "https://your-domain.com"
+        "APPKEY": "your_APPKEY_here",
+        "SIGN": "your_signature_here",
+        "HOST": "https://your-domain.com"
       }
     },
     "my-mcp-sse": {
@@ -327,9 +327,9 @@ For a more portable configuration, create an `.cursor/mcp.json` file in your pro
 You can also create a global configuration at `~/.cursor/mcp.json` to make your MCP servers available in all your Cursor workspaces.
 
 **Environment Variables:**
-- `MINGDAO_APP_KEY` (required): Your Mingdao application key
-- `MINGDAO_SIGN` (required): Your Mingdao signature
-- `MINGDAO_HOST` (optional): Custom host URL (e.g., https://your-domain.com). If provided, API calls will use `host/api` instead of `https://api.mingdao.com`
+- `APPKEY` (required): Your Mingdao application key
+- `SIGN` (required): Your Mingdao signature
+- `HOST` (optional): Custom host URL (e.g., https://your-domain.com). If provided, API calls will use `host/api` instead of `https://api.mingdao.com`
 
 Note:
 - The `command` type entries run the server in stdio mode
@@ -355,11 +355,11 @@ You can customize the server using environment variables:
 
 ```bash
 # Required Mingdao API credentials
-export MINGDAO_APP_KEY="your_app_key_here"
-export MINGDAO_SIGN="your_signature_here"
+export APPKEY="your_APPKEY_here"
+export SIGN="your_signature_here"
 
 # Optional custom host (if not using api.mingdao.com)
-export MINGDAO_HOST="https://your-domain.com"
+export HOST="https://your-domain.com"
 
 # Server configuration
 # Change the HTTP port (default is 3001)
