@@ -180,8 +180,8 @@ export class MingdaoApiService {
     return this.makeRequest('/v2/open/role/removeMembers', 'POST', data);
   }
 
-  async exitApp(): Promise<ApiResponse> {
-    return this.makeRequest('/v2/open/role/quit', 'POST', {});
+  async exitApp(data: any): Promise<ApiResponse> {
+    return this.makeRequest('/v2/open/role/quit', 'POST', data);
   }
 
   async getRoleDetail(data: any): Promise<ApiResponse> {
@@ -203,6 +203,39 @@ export class MingdaoApiService {
 
   async deleteOptionSet(data: any): Promise<ApiResponse> {
     return this.makeRequest('/v2/open/optionSet/delete', 'POST', data);
+  }
+
+  // Report APIs
+  async getPivotData(data: any): Promise<ApiResponse> {
+    // Use api2.mingdao.com for pivot data API
+    const apiConfig = this.getApiConfig();
+    const host = apiConfig.host || 'https://api2.mingdao.com';
+    const baseUrl = host.endsWith('/') ? host.slice(0, -1) : host;
+    const url = `${baseUrl}/api/report/getPivotData`;
+
+    const payload = {
+      appKey: apiConfig.appKey,
+      sign: apiConfig.sign,
+      ...data
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      throw new Error(`Failed to get pivot data: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
   }
 
   // Utility APIs

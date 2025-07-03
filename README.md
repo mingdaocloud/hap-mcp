@@ -109,20 +109,59 @@ HAP provides:
 
 HAP includes a complete set of tools for interacting with the Mingdao platform:
 
-### Available Tools (25+ Tools)
-- **Application Management**: Get app information and structure
-- **Worksheet Operations**: Create, read, update, delete worksheets and records
-- **Batch Operations**: Bulk create and update multiple records
-- **Data Management**: Advanced filtering, sorting, and pagination
-- **Record Operations**: Full CRUD operations on worksheet records
-- **Role Management**: Complete role and permission management
-- **Option Set Management**: Create and manage option sets
-- **Utility Functions**: Area information and other utilities
+### Available Tools (25 Tools)
+
+#### Core Worksheet Operations (7 Tools)
+- **add_worksheet_record**: Add new records to worksheets
+- **delete_worksheet_record**: Delete records from worksheets
+- **update_worksheet_record**: Update existing records
+- **get_worksheet_fields**: Get worksheet field information
+- **list_worksheet_records**: List records with filtering and pagination
+- **list_worksheets**: List all worksheets in application
+- **get_worksheet_pivot_data**: Get pivot table data with aggregation
+
+#### Application & Worksheet Management (8 Tools)
+- **get_app_info**: Get application structure and information
+- **get_worksheet_info**: Get detailed worksheet structure
+- **get_worksheet_rows**: Get records with advanced filtering
+- **get_row_detail**: Get detailed information of specific records
+- **add_row**: Create new records (simplified)
+- **update_row**: Update records (simplified)
+- **delete_row**: Delete records (simplified)
+- **create_worksheet**: Create new worksheets with controls
+
+#### Batch Operations (2 Tools)
+- **add_rows_batch**: Bulk create multiple records
+- **update_rows_batch**: Bulk update multiple records
+
+#### Advanced Features (4 Tools)
+- **get_related_records**: Get records from linked worksheets
+- **get_share_link**: Generate sharing links for records
+- **get_row_count**: Get total record count in worksheets
+- **get_row_logs**: Get operation history for records
+
+#### Role Management (6 Tools)
+- **get_roles**: List application roles
+- **create_role**: Create new roles with permissions
+- **delete_role**: Delete roles
+- **add_role_members**: Add users to roles
+- **remove_role_members**: Remove users from roles
+- **get_role_detail**: Get detailed role information
+
+#### Option Set Management (4 Tools)
+- **create_option_set**: Create new option sets
+- **get_option_set**: Get option set information
+- **update_option_set**: Update existing option sets
+- **delete_option_set**: Delete option sets
+
+#### Utility Tools (2 Tools)
+- **exit_app**: Exit from application
+- **get_area_info**: Get geographical area information
 
 ### Quick Example
 ```json
 {
-  "tool": "mingdao_get_worksheet_rows",
+  "tool": "get_worksheet_rows",
   "parameters": {
     "worksheetId": "worksheet_id",
     "pageSize": 50
@@ -130,7 +169,7 @@ HAP includes a complete set of tools for interacting with the Mingdao platform:
 }
 ```
 
-**Note**: Authentication is now handled automatically through environment variables. No need to pass `appKey`, `sign`, or `host` parameters in tool calls.
+**Note**: Authentication is now handled automatically through environment variables. No need to pass `appKey`, `sign`, or `host` parameters in tool calls. All tool names have been simplified by removing the `mingdao_` prefix.
 
 For detailed documentation, see [MINGDAO_API_TOOLS.md](./MINGDAO_API_TOOLS.md).
 

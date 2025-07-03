@@ -10,6 +10,13 @@ async function startServer() {
     const requiredEnvVars = ['MINGDAO_APP_KEY', 'MINGDAO_SIGN'];
     const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
 
+    console.error('环境变量检查结果:', { 
+      missingVars, 
+      MINGDAO_APP_KEY: process.env.MINGDAO_APP_KEY ? '已设置' : '未设置',
+      MINGDAO_SIGN: process.env.MINGDAO_SIGN ? '已设置' : '未设置',
+      MINGDAO_HOST: process.env.MINGDAO_HOST
+    });
+    
     if (missingVars.length > 0) {
       console.error(`Missing required environment variables: ${missingVars.join(', ')}`);
       console.error('Please set the following environment variables:');
