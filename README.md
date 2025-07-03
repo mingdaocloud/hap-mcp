@@ -25,14 +25,14 @@ Set up your Mingdao API credentials as environment variables:
 ```bash
 export APPKEY="your_APPKEY_here"
 export SIGN="your_signature_here"
-export HOST="https://your-domain.com"  # Optional: for custom domains
+export HOST="https://www.nocoly.com"  # Optional: for private deployment only
 ```
 
 ### 3. Configure Cursor MCP Settings
 
 Add the following configuration to your Cursor settings:
 
-**Option A: Using Global Configuration**
+**Option A: Standard Configuration (SaaS Version)**
 Create or edit `~/.cursor/mcp.json`:
 
 ```json
@@ -40,35 +40,36 @@ Create or edit `~/.cursor/mcp.json`:
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["@mingdaocloud/hap-mcp"],
+      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
       "env": {
         "APPKEY": "your_APPKEY_here",
-        "SIGN": "your_signature_here",
-        "HOST": "https://your-domain.com"
+        "SIGN": "your_signature_here"
       }
     }
   }
 }
 ```
 
-**Option B: Using Project Configuration**
-Create `.cursor/mcp.json` in your project root:
+**Option B: Private Deployment Configuration**
+For private deployment environments only. Create `.cursor/mcp.json` in your project root:
 
 ```json
 {
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["@mingdaocloud/hap-mcp"],
+      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here",
-        "HOST": "https://your-domain.com"
+        "HOST": "https://www.nocoly.com"
       }
     }
   }
 }
 ```
+
+**Note**: The `HOST` parameter is only required for private deployment environments. Replace `https://www.nocoly.com` with your actual private deployment server URL.
 
 ### 4. Start Using in Cursor
 
@@ -305,16 +306,36 @@ To connect to your MCP server from Cursor:
 
 For a more portable configuration, create an `.cursor/mcp.json` file in your project's root directory:
 
+**Standard Configuration (SaaS Version):**
 ```json
 {
   "mcpServers": {
     "hap-mcp": {
       "command": "npx",
-      "args": ["@mingdaocloud/hap-mcp"],
+      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
+      "env": {
+        "APPKEY": "your_APPKEY_here",
+        "SIGN": "your_signature_here"
+      }
+    },
+    "my-mcp-sse": {
+      "url": "http://localhost:3001/sse"
+    }
+  }
+}
+```
+
+**Private Deployment Configuration:**
+```json
+{
+  "mcpServers": {
+    "hap-mcp": {
+      "command": "npx",
+      "args": ["-y", "@mingdaocloud/hap-mcp@latest"],
       "env": {
         "APPKEY": "your_APPKEY_here",
         "SIGN": "your_signature_here",
-        "HOST": "https://your-domain.com"
+        "HOST": "https://www.nocoly.com"
       }
     },
     "my-mcp-sse": {
@@ -329,7 +350,7 @@ You can also create a global configuration at `~/.cursor/mcp.json` to make your 
 **Environment Variables:**
 - `APPKEY` (required): Your Mingdao application key
 - `SIGN` (required): Your Mingdao signature
-- `HOST` (optional): Custom host URL (e.g., https://your-domain.com). If provided, API calls will use `host/api` instead of `https://api.mingdao.com`
+- `HOST` (optional): Custom host URL for private deployment only (e.g., https://www.nocoly.com). If provided, API calls will use `host/api` instead of `https://api.mingdao.com`
 
 Note:
 - The `command` type entries run the server in stdio mode
@@ -358,8 +379,8 @@ You can customize the server using environment variables:
 export APPKEY="your_APPKEY_here"
 export SIGN="your_signature_here"
 
-# Optional custom host (if not using api.mingdao.com)
-export HOST="https://your-domain.com"
+# Optional custom host (for private deployment only)
+export HOST="https://www.nocoly.com"
 
 # Server configuration
 # Change the HTTP port (default is 3001)
